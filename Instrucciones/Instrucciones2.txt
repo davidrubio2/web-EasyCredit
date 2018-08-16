@@ -1,0 +1,25 @@
+username
+
+historial de crédito (vacío o previo)
+
+Perfil
+nombre del usuario  = usarname?
+solicitud pendiente 
+proceso de autorización
+
+Historial
+historial crediticio del usuario = solicitudes aceptadas y rechazadas.
+
+Solicitudes
+lista de todas las solicitudes del usuario que
+esperan el proceso de autorización = pendientes
+
+ACEPTADA o RECHAZADA
+
+Nueva solicitud
+-monto a solicitar.
+-edad.
+-si tiene tarjeta de crédito.
+-el plazo a elegir
+donde será de 3, 6 y 9 meses.
+

@@ -1,0 +1,96 @@
+Un cliente procura la implementación de la primera funcionalidad de su plataforma en de
+préstamos:
+EasyCredit. 
+Cualquier usuario es elegible para iniciar una nueva petición de
+crédito, 
+al hacer una petición de crédito, 
+la plataforma deberá registrar ésta petición junto
+con la información requerida de la misma, 
+ésta solicitud deberá ser procesada por el
+sistema mediante el siguiente criterio:
+personas de 20 años en adelante,
+ que tengan
+tarjeta de crédito.
+
+
+Crear una SPA (single page application) con los siguientes requerimientos.
+
+Cuando el usuario aterriza en el sitio, deberá mostrar un formulario, con un input
+text sencillo (username) y un botón de “entrar”.
+
+Si el usuario es nuevo, se creará una cuenta asociada a éste, con historial de
+crédito vacío, de lo contrario, se cargará su dashboard, con su historial previo. No
+es necesario autenticación con password (nos interesa lo funcional, no la
+seguridad)
+
+Una vez iniciada la sesión, el usuario verá a su alcance 3 Widgets: “Perfil”,
+“Historial”, “Solicitudes” (vea diseño):
+
+*Perfil: Muestra el nombre del usuario y si tiene alguna solicitud pendiente
+debe mostrar tal solicitud, como va con su proceso de autorización.
+
+*Historial: Deberá contener el historial crediticio del usuario.
+*Solicitudes: Contiene una lista de todas las solicitudes del usuario que
+esperan el proceso de autorización. Además de un botón que diga: “Nueva
+solicitud”
+
+Al dar click en el botón “Nueva solicitud”, se deberá mostrar un formulario con el
+monto a solicitar, edad, checkbox si tiene tarjeta de crédito y el plazo a elegir
+donde será de 3, 6 y 9 meses.
+*3 pagos: 5% de interés
+*6 pagos: 7% de interés
+*9 pagos: 12% de interés
+
+El formulario mostrará el total a pagar después del plazo. (vea diseño)
+
+Cuando el usuario crea la solicitud, ésta deberá ser enviada a procesar en una cola
+de procesamiento en el backend y colocar ésta solicitud nueva en su widget de
+solicitudes para su autorización. Al aceptar o rechazar la solicitud deberá quitarse
+de la lista y dejar solo solicitudes pendientes de autorizar. La autorización solo
+puede ser procesada como ACEPTADA o RECHAZADA.
+
+Las solicitudes de crédito deben ser procesadas por una cola de procesamiento
+independiente de la RestApi. Puede ser cron job, tarea de Windows, etc.
+
+Cuando el sistema procesa la solicitud, deberá actualizarla inmediatamente en
+base de datos.
+
+Al finalizar la solicitud, se mostrará si fue aprobada o rechazada con sus
+respectivos % y ésta deberá moverse a la lista de historial crediticio, definiendo si
+ésta fue aprobada o no con un color verde o rojo.
+
+El boceto provisto es una referencia para las explicaciones de los requisitos funcionales. La
+importancia del boceto es mostrar algunos de los datos requeridos que se mostrarán, y
+para ayudar a la comprensión de lo que se solicita. Puedes seguir el esquema para su
+interfaz de usuario, o ignorar completamente, o cualquier cosa intermedia, depende de ti.
+
+La funcionalidad más importante es el proceso de licitación de la solicitud y los cambios
+correspondientes en el crédito e historial para el solicitante.
+
+Asume cualquier otra funcionalidad requerida para alcanzar los requisitos anteriores
+basados en la lógica y tu experiencia
+
+Mandatorios:
+MVC (Model > View > Controller)
+
+Cada uno de los 3 widgets deberá ser en algún framework para front end
+(AngularJS, Angular, ReactJS, Ember, VueJS)
+
+Usar algún framework para Backend (Java sprint, Java Vertx, NodeJS Express,
+NodeJS SocketIo, PHP Slim, PHP Falcon, Etc.) Cualquier tecnología donde te sientas
+más comodo.
+
+Aplicar las validaciones necesarias de entrada de datos para crear una aplicación
+estable.
+
+Todos los datos deberán persistir, incluso si la aplicación se apaga y se inicia de
+nuevo.
+
+Los orígenes de datos deberán ser SQL en cualquier de sus variantes (MySql,
+MSSQL, Postgres, etc)
+
+Incluso si no puedes terminar todas las tareas, trata de hacer una aplicación
+estable.
+
+Eres libre de elegir tecnología, frameworks y el protocolo de comunicación (HTTP,
+Websockets).
