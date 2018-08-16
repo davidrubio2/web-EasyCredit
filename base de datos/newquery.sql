@@ -8,5 +8,6 @@ ID SERIAL  NOT NULL,
 Monto REAL NOT NULL,
 Edad INT NOT NULL,
 TarjetaDeCredito BOOLEAN NOT NULL,
-PlazoDeInteres BOOLEAN NOT NULL
+PlazoDeInteres REAL NOT NULL,
+ProcesoDeAutorizacion BOOLEAN NOT NULL
 );
