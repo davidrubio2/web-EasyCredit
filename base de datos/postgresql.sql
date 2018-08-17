@@ -1,6 +1,8 @@
-﻿create table Usuario(
+﻿CREATE DATABASE EasyCredit
+
+create table Usuario(
 ID SERIAL PRIMARY KEY NOT NULL,
-Usuario VARCHAR(20) NOT NULL
+Nombre VARCHAR(20) NOT NULL
 );
 
 create table Solicitud(
@@ -12,7 +14,8 @@ PlazoDeInteres REAL NOT NULL,
 ProcesoDeAutorizacion BOOLEAN DEFAULT NULL
 );
 
-INSERT INTO Usuario(Usuario) VALUES('david');
+INSERT INTO Usuario(Nombre) VALUES('david');
+
 INSERT INTO Solicitud(ID,Monto,Edad,TarjetaDeCredito,PlazoDeInteres)
 VALUES('1','100','18',TRUE,'4');
 drop table Usuario;
