@@ -8,9 +8,6 @@ var cn = {
     password: '1'
 };
 
-
-
-
 var db = pgp(cn);
 
 
