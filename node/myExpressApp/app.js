@@ -27,6 +27,10 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(express.static(__dirname + '/client')); 
 
+/*var server = app.listen(8080, "192.168.0.29", function() {
+  console.log('Ready on port %d', server.address().port);
+});*/
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
