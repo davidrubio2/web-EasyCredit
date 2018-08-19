@@ -8,7 +8,8 @@ InicioSession.controller("InicioSessionController", ['$scope', 'InicioSessionSer
                 }
                 InicioSessionService.IngresarService(data).then(function (response) {
                          $scope.InicioSessionAppService.push(response.data)
-                         $scope.Session = response.data;   
+                         $scope.Sessions = response.data; 
+                         location.href = "#/PanelPage?Id=" + response.data[0].usuario;
                 });
 			
         }
