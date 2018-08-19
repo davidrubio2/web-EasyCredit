@@ -1,20 +1,20 @@
 'use strict';
 
-var CreditApp = angular.module('CreditApp', ['ngRoute', 'Inicio','Panel']);
-CreditApp.config(['$routeProvider',
+var EasyCredit = angular.module('EasyCredit', ['ngRoute', 'InicioSession','PanelSession']);
+EasyCredit.config(['$routeProvider',
     function (
         $routeProvider
     ) {
         $routeProvider.
-            when('/Inicio', {
+            when('/InicioPage', {
                 templateUrl: 'pages/InicioPage.html',
-                controller: 'InicioController'
+                controller: 'InicioSessionController'
             }).
-            when('/Panel', {
+            when('/PanelPage', {
                 templateUrl: 'pages/PanelPage.html',
-                controller: 'PanelController'
+                controller: 'PanelSesssionController'
             }).
             otherwise({
-                redirectTo: '/Inicio'
+                redirectTo: '/InicioPage'
             });
     }]);
