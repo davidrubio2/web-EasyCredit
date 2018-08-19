@@ -15,10 +15,10 @@ var db = pgp(cn);
 
 module.exports = {
   consultarGrabarUsuario: consultarGrabarUsuario
-
 };
 
-  function consultarGrabarUsuario(req, res, next) {
+
+function consultarGrabarUsuario(req, res, next) {
     db.func('usuario',[req.body.Username])
       .then(function (data) {
         res.status(200)
