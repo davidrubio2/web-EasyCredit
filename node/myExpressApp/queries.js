@@ -15,11 +15,11 @@ var db = pgp(cn);
 
 module.exports = {
   consultarGrabarUsuario: consultarGrabarUsuario
+
 };
 
-
-function consultarGrabarUsuario(req, res, next) {
-    db.func('usuario',["david"])
+  function consultarGrabarUsuario(req, res, next) {
+    db.func('usuario',[req.body.Username])
       .then(function (data) {
         res.status(200)
           .json({
@@ -32,3 +32,5 @@ function consultarGrabarUsuario(req, res, next) {
         return next(err);
       });
   }
+  //response is not defined
+  //chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
