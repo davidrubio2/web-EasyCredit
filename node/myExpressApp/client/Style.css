@@ -1,0 +1,16 @@
+.red-text{
+    color:red;
+  }
+
+label, input[type="submit"] {
+  width: 130px;
+  display: inline-block;
+}
+
+div {
+  margin: 10px;
+}
+
+#Orders h1 {
+   color:red;
+}
