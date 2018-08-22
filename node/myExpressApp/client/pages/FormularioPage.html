@@ -1,0 +1,37 @@
+<form  class="contact-form"  ng-submit="Solicitar()" name="inquiryForm" novalidate  >
+
+        <div  class="col-sm-10">
+          <div id="monto">
+            <label for="name">Monto:</label>
+            <input type="number" min="0.00" max="10000.00" step="0.01"
+                   ng-pattern="first_name" ng-model="firstname" ng-required="true"  class="form-control">      
+        </div>
+        
+      <div id="edad">
+            <label for="name">Edad:</label>
+            <input input type="number" name="age" value=""
+                   ng-pattern="last_name" ng-model="lastname" ng-required="true"  class="form-control">
+          </div>
+       
+      <div  id="tarjeta" class=" form-check ">
+             <label class="form-check-label">
+             <input type="checkbox" class="form-check-input" value="">Tarjeta
+             </label>
+        </div>
+                  
+
+       <div id="plazo">
+            <label for="name">Plazo:</label>
+                    <input  list="plazos" name="browser" ng-model="numberOfPizzas" class="form-control" required>
+            <datalist id="plazos">
+            <option value="3 pagos: 5% de interes">
+            <option value="6 pagos: 7% de interes">
+            <option value="9 pagos: 12% de interes">
+            </datalist>
+           </div> 
+           <div>
+            <button  type="submit" id="submit" name="submit" 
+                    class="btn btn-primary pull-left" 
+                    ng-disabled="inquiryForm.$invalid">Solicitar</button> 
+                </div> 
+    </form>

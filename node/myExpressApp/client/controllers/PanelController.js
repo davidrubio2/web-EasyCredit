@@ -33,5 +33,9 @@ $scope.PanelSessionAppService = []
             $scope.SolicitudesPendientes = response.data.data;
      });
 
+     $scope.Ingresar = function () {
+                 location.href = "#/FormularioPage";
+}
+
 
 }]);

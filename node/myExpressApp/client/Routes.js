@@ -14,6 +14,9 @@ EasyCredit.config(['$routeProvider',
                 templateUrl: 'pages/PanelPage.html',
                 controller: 'PanelSesssionController as main'
             }).
+            when('/FormularioPage', {
+                templateUrl: 'pages/FormularioPage.html'
+            }).
             otherwise({
                 redirectTo: '/InicioPage'
             });
