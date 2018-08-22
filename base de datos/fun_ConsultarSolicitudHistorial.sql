@@ -1,15 +1,13 @@
 CREATE FUNCTION fun_ConsultarSolicitudHistorial(Id Int)
-RETURNS table AS $$
-DECLARE
-fun_Id ALIAS FOR $1;
+ RETURNS TABLE (
+ fun_Monto real,
+ fun_Edad int
+) 
 
+AS $$
 BEGIN
-	select * from  Solicitud where ProcesoDeAutorizacion is not NULL and IdUsuario = fun_Id;       
-	if fun_IdSolicitud is null
-       then
-			RETURN false;
-        else
-      
+RETURN QUERY SELECT
+	 Monto,Edad from  Solicitud where ProcesoDeAutorizacion is not NULL and IdUsuario = Id;       
 END;
 $$ LANGUAGE plpgsql
 SECURITY DEFINER

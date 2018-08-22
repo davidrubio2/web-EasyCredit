@@ -20,9 +20,9 @@ $$ LANGUAGE plpgsql
 SECURITY DEFINER
 
 
-select usuario('david')
+select fun_ConsultarGrabarUsuario('david')
 
-drop function usuario
+drop function fun_ConsultarGrabarUsuario
 
 CREATE FUNCTION fun_NuevaSolicitud(Id Int,Monto real, Edad int, TarjetaDeCredito boolean,PlazoDeInteres real, ProcesoDeAutorizacion boolean  )
 RETURNS boolean AS $$
@@ -57,7 +57,7 @@ INSERT INTO Solicitud(IdUsuario,
 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion)
 VALUES('2','100','20',TRUE,'7',NULL);
 
-select fun_NuevaSolicitud('2','100','20',FALSE,'7',NULL)
+select fun_NuevaSolicitud('2','100','20',TRUE,'7',NULL)
 
 CREATE FUNCTION fun_AceptarSolicitud()
 RETURNS boolean AS $$
@@ -101,21 +101,24 @@ from Solicitud WHERE ProcesoDeAutorizacion IS NULL order by fec_Aceptacion limit
 
 UPDATE Solicitud set ProcesoDeAutorizacion = TRUE ,  fec_Aceptacion = timenow()  where IdSolicitud = '3';
 
+IdUsuario,
+Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion
 
 CREATE FUNCTION fun_ConsultarSolicitudHistorial(Id Int)
-RETURNS table AS $$
-DECLARE
-fun_Id ALIAS FOR $1;
+ RETURNS TABLE (
+ fun_Monto real,
+ fun_Edad int
+) 
 
+AS $$
 BEGIN
-	select * from  Solicitud where ProcesoDeAutorizacion is not NULL and IdUsuario = fun_Id;       
-	if fun_IdSolicitud is null
-       then
-			RETURN false;
-        else
-      
+RETURN QUERY SELECT
+	 Monto,Edad from  Solicitud where ProcesoDeAutorizacion is not NULL and IdUsuario = Id;       
 END;
 $$ LANGUAGE plpgsql
 SECURITY DEFINER
 
-select * from  Solicitud where ProcesoDeAutorizacion is not NULL and IdUsuario = '1'
+drop function fun_ConsultarSolicitudHistorial;
+select fun_ConsultarSolicitudHistorial('2');
+
+select * from  Solicitud where ProcesoDeAutorizacion is not NULL and IdUsuario = '2'
