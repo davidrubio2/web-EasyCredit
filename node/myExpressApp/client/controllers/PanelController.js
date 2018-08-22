@@ -25,8 +25,13 @@ $scope.PanelSessionAppService = []
         }
             PanelSessionService.getHistorialSolicitudes(data).then(function (response) {
                 $scope.PanelSessionAppService.push(response.data)
-                $scope.datos = response.data.data;
+                $scope.HistorialSolicitudes = response.data.data;
         });
+
+        PanelSessionService.getSolicitudesPendientes(data).then(function (response) {
+            $scope.PanelSessionAppService.push(response.data)
+            $scope.SolicitudesPendientes = response.data.data;
+     });
 
 
 }]);
