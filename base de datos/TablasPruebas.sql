@@ -3,7 +3,7 @@
 create table Usuario(
 IdUsuario SERIAL PRIMARY KEY NOT NULL,
 Nombre VARCHAR(20) NOT NULL,
-fec_inserccion timestamp DEFAULT timenow() NOT NULL
+fec_Inserccion TIMESTAMP DEFAULT TIMENOW() NOT NULL
 );
 
 create table Solicitud(
@@ -11,13 +11,16 @@ IdSolicitud SERIAL  NOT NULL,
 IdUsuario INT NOT NULL,
 Monto REAL NOT NULL,
 Edad INT NOT NULL,
-TarjetaDeCredito BOOLEAN NOT NULL,
+TarjetaDeCredito VARCHAR(10) NOT NULL,
 PlazoDeInteres REAL NOT NULL,
-ProcesoDeAutorizacion BOOLEAN DEFAULT NULL,
-fec_Creacion timestamp DEFAULT timenow() NOT NULL,
-fec_Aceptacion timestamp 
+ProcesoDeAutorizacion varchar(10) DEFAULT ('PENDIENTE'),
+fec_Creacion TIMESTAMP DEFAULT TIMENOW() NOT NULL,
+fec_Aceptacion TIMESTAMP 
 );
 
+pendiente
+aceptada
+rechazada
 INSERT INTO Usuario(Nombre) VALUES('david');
 
 INSERT INTO Solicitud(IdUsuario,
