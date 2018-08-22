@@ -120,6 +120,64 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/consultarSolicitudesPendientes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Id\": \"2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/consultarSolicitudesPendientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"consultarSolicitudesPendientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/consultarPerfil",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Id\": \"2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/consultarPerfil",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"consultarPerfil"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
