@@ -26,7 +26,6 @@ $scope.PanelSessionAppService = []
             PanelSessionService.getHistorialSolicitudes(data).then(function (response) {
                 $scope.PanelSessionAppService.push(response.data)
                 $scope.datos = response.data.data;
-               // $scope.datos = data[0];
         });
 
 
