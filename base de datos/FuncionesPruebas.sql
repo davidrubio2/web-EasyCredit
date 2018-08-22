@@ -72,7 +72,7 @@ BEGIN
 		then
 			RETURN false;
 		else
-			select IdSolicitud,edad,TarjetaDeCredito INTO fun_IdSolicitud,fun_Edad,fun_TarjetaDeCredito  from Solicitud  WHERE ProcesoDeAutorizacion IS NULL order by fec_Aceptacion limit 1;
+			select IdSolicitud,edad,TarjetaDeCredito INTO fun_IdSolicitud,fun_Edad,fun_TarjetaDeCredito  from Solicitud  WHERE ProcesoDeAutorizacion IS NULL order by fec_creacion asc limit 1;
 			if fun_Edad >= 20 and fun_TarjetaDeCredito is TRUE
 				then
 					update Solicitud set ProcesoDeAutorizacion = TRUE ,  fec_Aceptacion = timenow()  where IdSolicitud = fun_IdSolicitud;
@@ -146,3 +146,34 @@ drop function fun_ConsultarSolicitudesPendientes;
 select fun_ConsultarSolicitudesPendientes('2');
 
 select * from  Solicitud where ProcesoDeAutorizacion is  NULL and IdUsuario = '2'
+
+
+CREATE FUNCTION fun_ConsultarPerfil(Id Int)
+ RETURNS TABLE (
+ val_Nombre varchar(20),
+ val_Monto real,
+ val_Edad int,
+ val_TarjetaDeCredito Boolean,
+ val_PlazoDeInteres real,
+ val_ProcesoDeAutorizacion Boolean
+) 
+
+AS $$
+BEGIN
+RETURN QUERY select Usuario.Nombre, Solicitud.Monto,Solicitud.Edad,Solicitud.TarjetaDeCredito,Solicitud.PlazoDeInteres,Solicitud.ProcesoDeAutorizacion 
+from  Solicitud 
+ inner join  Usuario  on Usuario.idusuario = Solicitud.idusuario where Usuario.idusuario = '2' order by Solicitud.fec_creacion desc limit 1;
+     
+END;
+$$ LANGUAGE plpgsql
+SECURITY DEFINER
+
+drop function fun_ConsultarPerfil;
+select fun_ConsultarPerfil('2');
+
+select Usuario.Nombre, Solicitud.Monto,Solicitud.Edad,Solicitud.TarjetaDeCredito,Solicitud.PlazoDeInteres,Solicitud.ProcesoDeAutorizacion 
+from  Solicitud 
+ inner join  Usuario  on Usuario.idusuario = Solicitud.idusuario where Usuario.idusuario = '2' order by Solicitud.fec_creacion desc limit 1
+
+select *
+ from Solicitud  WHERE ProcesoDeAutorizacion IS NULL order by fec_creacion desc limit 1
