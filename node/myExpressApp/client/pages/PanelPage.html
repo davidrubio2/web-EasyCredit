@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in main.perfil">
+                <tr ng-repeat="item in main.perfil">           
                     <td>{{ item.nombre }}</td>
                     <td>{{ item.solicitud }}</td>
                 </tr>
@@ -38,9 +38,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in main.historial">
-                    <td>{{ item.monto }}</td>
-                    <td>{{ item.edad }}</td>
+                <tr ng-repeat="item in datos">
+                    <td>{{ item.fun_monto }}</td>
+                    <td>{{ item.fun_edad }}</td>
                     <td>{{ item.tarjeta }}</td>
                     <td>{{ item.plazo }}</td>
                     <td>{{ item.proceso }}</td>
@@ -64,7 +64,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in main.solicitudes">
-                    <td>{{ item.monto }}</td>
+                    <td>{{ item.fun_monto }}</td>
                     <td>{{ item.edad }}</td>
                     <td>{{ item.tarjeta }}</td>
                     <td>{{ item.plazo }}</td>
