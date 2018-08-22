@@ -19,7 +19,7 @@ module.exports = {
 
 
 function consultarGrabarUsuario(req, res, next) {
-    db.func('usuario',[req.body.Username])
+    db.func('fun_ConsultarGrabarUsuario',[req.body.Username])
       .then(function (data) {
         res.status(200)
           .json({
