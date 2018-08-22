@@ -14,7 +14,10 @@ var db = pgp(cn);
 // add query functions
 
 module.exports = {
-  consultarGrabarUsuario: consultarGrabarUsuario
+  consultarGrabarUsuario: consultarGrabarUsuario,
+  consultarSolicitudHistorial: consultarSolicitudHistorial,
+  nuevaSolicitud: nuevaSolicitud,
+  aceptarSolicitud: aceptarSolicitud
 };
 
 
@@ -49,7 +52,7 @@ function consultarGrabarUsuario(req, res, next) {
   }
 
   function nuevaSolicitud(req, res, next) {
-    db.func('fun_NuevaSolicitud',[req.body.Id,req.body.Monto,req.body.Edad,req.body.TarjetaDeCredito,req.body.PlazoDeInteres,req.body.ProcesoDeAutorizacion])
+    db.func('fun_NuevaSolicitud',[req.body.Id,req.body.Monto,req.body.Edad,req.body.TarjetaDeCredito,req.body.PlazoDeInteres])
       .then(function (data) {
         res.status(200)
           .json({

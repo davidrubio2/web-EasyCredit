@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "2ce4c8f2-926e-48ab-aa4b-cc192d0d6832",
+		"name": "concredito",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/api/consultarGrabarUsuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Username\": \"emigrante\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/consultarGrabarUsuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"consultarGrabarUsuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/consultarSolicitudHistorial",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Id\": \"2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/consultarSolicitudHistorial",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"consultarSolicitudHistorial"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/nuevaSolicitud",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Id\": \"2\",\n\t\"Monto\": \"100\",\n\t\"Edad\": \"20\",\n\t\"TarjetaDeCredito\": \"TRUE\",\n\t\"PlazoDeInteres\": \"7\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/nuevaSolicitud",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"nuevaSolicitud"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/aceptarSolicitud",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Id\" = \"\",\n\t\"Monto\"  = \"\",\n\t\"Edad\"  = \"\",\n\t\"TarjetaDeCredito\"  = \"\",\n\t\"PlazoDeInteres\"  = \"\",\n\t\"ProcesoDeAutorizacion\"  = \"\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/aceptarSolicitud",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"aceptarSolicitud"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
