@@ -17,7 +17,8 @@ module.exports = {
   consultarGrabarUsuario: consultarGrabarUsuario,
   consultarSolicitudHistorial: consultarSolicitudHistorial,
   nuevaSolicitud: nuevaSolicitud,
-  aceptarSolicitud: aceptarSolicitud
+  aceptarSolicitud: aceptarSolicitud,
+  consultarSolicitudesPendientes: consultarSolicitudesPendientes
 };
 
 
@@ -81,6 +82,20 @@ function consultarGrabarUsuario(req, res, next) {
       });
   }
 
+  function consultarSolicitudesPendientes(req, res, next) {
+    db.func('fun_ConsultarSolicitudesPendientes',[req.body.Id])
+      .then(function (data) {
+        res.status(200)
+          .json({
+            status: 'success',
+            data: data,
+            message: 'Consulta de Solicitudes Pendientes'
+          });
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  }
 
   //response is not defined
   //chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
