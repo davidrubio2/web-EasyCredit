@@ -1,6 +1,9 @@
-var PanelSession = angular.module("PanelSession", []);
-PanelSession.controller("PanelSesssionController", ['$scope',  function ($scope) {
+var PanelSession = angular.module("PanelSession", ['PanelSessionAppService']);
+PanelSession.controller("PanelSesssionController", ['$scope','PanelSessionService',  function ($scope,PanelSessionService) {
  
+
+$scope.PanelSessionAppService = []
+
 
     function GetURLParameter(sParam)
     {
@@ -16,5 +19,15 @@ PanelSession.controller("PanelSesssionController", ['$scope',  function ($scope)
         }
     }
     $scope.Id = GetURLParameter('Id');
+
+            var data = {
+                "Id": $scope.Id,                
+        }
+            PanelSessionService.getHistorialSolicitudes(data).then(function (response) {
+                $scope.PanelSessionAppService.push(response.data)
+                $scope.datos = response.data.data;
+               // $scope.datos = data[0];
+        });
+
 
 }]);
