@@ -15,19 +15,20 @@
        
       <div  id="tarjeta" class=" form-check ">
              <label class="form-check-label">
-             <input type="checkbox" class="form-check-input" value="">Tarjeta
+             <input type="checkbox" class="form-check-input" value=""  >Tarjeta
              </label>
         </div>
                   
 
        <div id="plazo">
             <label for="name">Plazo:</label>
-                    <input  list="plazos" name="browser" ng-model="numberOfPizzas" class="form-control" required>
-            <datalist id="plazos">
-            <option value="3 pagos: 5% de interes">
-            <option value="6 pagos: 7% de interes">
-            <option value="9 pagos: 12% de interes">
-            </datalist>
+            
+            <select id="plazos">
+                         <option value="3 pagos: 5% de interes" selected>3 pagos: 5% de interes</option>
+                         <option value="6 pagos: 7% de interes" selected>6 pagos: 7% de interes</option>
+                         <option value="9 pagos: 12% de interes" selected>9 pagos: 12% de interes</option>
+            </select>
+
            </div> 
            <div>
             <button  type="submit" id="submit" name="submit" 
