@@ -1,6 +1,6 @@
 'use strict';
 
-var EasyCredit = angular.module('EasyCredit', ['ngRoute', 'InicioSession','PanelSession']);
+var EasyCredit = angular.module('EasyCredit', ['ngRoute', 'InicioSession','PanelSession','FormularioSession']);
 EasyCredit.config(['$routeProvider',
     function (
         $routeProvider
@@ -15,7 +15,8 @@ EasyCredit.config(['$routeProvider',
                 controller: 'PanelSesssionController as main'
             }).
             when('/FormularioPage', {
-                templateUrl: 'pages/FormularioPage.html'
+                templateUrl: 'pages/FormularioPage.html',
+                controller: 'FormularioSessionController'
             }).
             otherwise({
                 redirectTo: '/InicioPage'
