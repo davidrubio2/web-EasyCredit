@@ -1,4 +1,4 @@
-CREATE FUNCTION usuario(usuario TEXT)
+CREATE FUNCTION fun_ConsultarGrabarUsuario(usuario TEXT)
 RETURNS int AS $$
 DECLARE
 
