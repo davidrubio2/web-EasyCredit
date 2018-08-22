@@ -18,7 +18,8 @@ module.exports = {
   consultarSolicitudHistorial: consultarSolicitudHistorial,
   nuevaSolicitud: nuevaSolicitud,
   aceptarSolicitud: aceptarSolicitud,
-  consultarSolicitudesPendientes: consultarSolicitudesPendientes
+  consultarSolicitudesPendientes: consultarSolicitudesPendientes,
+  consultarPerfil: consultarPerfil
 };
 
 
@@ -90,6 +91,21 @@ function consultarGrabarUsuario(req, res, next) {
             status: 'success',
             data: data,
             message: 'Consulta de Solicitudes Pendientes'
+          });
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  }
+
+  function consultarPerfil(req, res, next) {
+    db.func('fun_ConsultarPerfil',[req.body.Id])
+      .then(function (data) {
+        res.status(200)
+          .json({
+            status: 'success',
+            data: data,
+            message: 'Consulta del Perfil'
           });
       })
       .catch(function (err) {

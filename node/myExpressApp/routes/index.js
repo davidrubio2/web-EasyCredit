@@ -6,6 +6,7 @@ router.post('/api/consultarSolicitudHistorial', db.consultarSolicitudHistorial);
 router.post('/api/nuevaSolicitud', db.nuevaSolicitud);
 router.get('/api/aceptarSolicitud', db.aceptarSolicitud);
 router.post('/api/consultarSolicitudesPendientes', db.consultarSolicitudesPendientes);
+router.post('/api/consultarPerfil', db.consultarPerfil);
 
 module.exports = router;
 
