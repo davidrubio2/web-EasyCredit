@@ -32,5 +32,52 @@ function consultarGrabarUsuario(req, res, next) {
         return next(err);
       });
   }
+ 
+  function consultarSolicitudHistorial(req, res, next) {
+    db.func('fun_ConsultarSolicitudHistorial',[req.body.Id])
+      .then(function (data) {
+        res.status(200)
+          .json({
+            status: 'success',
+            data: data,
+            message: 'Consulta de Solicitudes Historial'
+          });
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  }
+
+  function nuevaSolicitud(req, res, next) {
+    db.func('fun_NuevaSolicitud',[req.body.Id,req.body.Monto,req.body.Edad,req.body.TarjetaDeCredito,req.body.PlazoDeInteres,req.body.ProcesoDeAutorizacion])
+      .then(function (data) {
+        res.status(200)
+          .json({
+            status: 'success',
+            data: data,
+            message: 'Solicitud Insertada'
+          });
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  }
+
+  function aceptarSolicitud(req, res, next) {
+    db.func('fun_AceptarSolicitud',[])
+      .then(function (data) {
+        res.status(200)
+          .json({
+            status: 'success',
+            data: data,
+            message: 'Solicitud Aceptada'
+          });
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  }
+
+
   //response is not defined
   //chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
