@@ -14,3 +14,15 @@ div {
 #Orders h1 {
    color:red;
 }
+
+#table_perfil {  
+  background:lightgrey;
+}
+
+#table_historial {
+background:lightgrey;
+}
+#table_solicitudes {
+background:lightgrey;
+
+}
