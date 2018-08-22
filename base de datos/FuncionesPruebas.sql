@@ -105,19 +105,22 @@ Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion
 
 CREATE FUNCTION fun_ConsultarSolicitudHistorial(Id Int)
  RETURNS TABLE (
- fun_Monto real,
- fun_Edad int
+ val_Monto real,
+ val_Edad int,
+ val_TarjetaDeCredito Boolean,
+ val_PlazoDeInteres real,
+ val_ProcesoDeAutorizacion Boolean
 ) 
 
 AS $$
 BEGIN
 RETURN QUERY SELECT
-	 Monto,Edad from  Solicitud where ProcesoDeAutorizacion is not NULL and IdUsuario = Id;       
+	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion is not NULL and IdUsuario = Id;       
 END;
 $$ LANGUAGE plpgsql
 SECURITY DEFINER
 
 drop function fun_ConsultarSolicitudHistorial;
-select fun_ConsultarSolicitudHistorial('6');
+select fun_ConsultarSolicitudHistorial('2');
 
 select * from  Solicitud where ProcesoDeAutorizacion is not NULL and IdUsuario = '2'
