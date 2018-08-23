@@ -1,3 +1,139 @@
+﻿CREATE OR REPLACE FUNCTION fun_instalar_tablas_credito()
+RETURNS smallint AS
+$BODY$
+DECLARE
+	iExiste	integer default 0;
+BEGIN	
+
+	--TALBE_Solicitud.SQL
+		SELECT count(table_name) into iExiste  FROM information_schema.tables where lower(table_name) = lower('Usuario');
+		IF (iExiste = 0) THEN		
+			create table Usuario(
+			IdUsuario SERIAL PRIMARY KEY NOT NULL,
+			Nombre VARCHAR(20) NOT NULL,
+			fec_Inserccion TIMESTAMP DEFAULT TIMENOW() NOT NULL);
+		END IF;	
+		iExiste = 0;
+		
+		--TALBE_Usuario.SQL
+		SELECT count(table_name) into iExiste  FROM information_schema.tables where lower(table_name) = lower('Solicitud');
+		IF (iExiste = 0) THEN		
+			create table Solicitud(
+				IdSolicitud SERIAL  NOT NULL,
+				IdUsuario INT NOT NULL,
+				Monto REAL NOT NULL,
+				Edad INT NOT NULL,
+				TarjetaDeCredito VARCHAR(10) NOT NULL,
+				PlazoDeInteres REAL NOT NULL,
+				ProcesoDeAutorizacion varchar(10) DEFAULT ('PENDIENTE'),
+				fec_Creacion TIMESTAMP DEFAULT TIMENOW() NOT NULL,
+				fec_Aceptacion TIMESTAMP);
+		END IF;	
+		iExiste = 0;
+		
+		return 1;
+END;
+$BODY$
+LANGUAGE 'plpgsql' VOLATILE SECURITY DEFINER;
+
+
+SELECT fun_instalar_tablas_credito();
+DROP FUNCTION fun_instalar_tablas_credito();
+
+CREATE OR REPLACE FUNCTION fun_InstalarFunciones()
+	RETURNS VOID AS
+$BODY$
+
+BEGIN
+	-- fun_AceptarSolicitud.sql
+	PERFORM proname  FROM pg_proc WHERE proname = 'fun_aceptarsolicitud';
+	IF found THEN
+		DROP FUNCTION fun_AceptarSolicitud();
+	END IF;
+
+	-- fun_ConsultarGrabarUsuario.sql
+	PERFORM proname   FROM pg_proc WHERE proname = 'fun_consultargrabarusuario';
+	IF  found THEN
+		DROP FUNCTION fun_ConsultarGrabarUsuario(usuario TEXT);
+	END IF;
+
+	-- fun_ConsultarPerfil.sql
+	PERFORM proname FROM pg_proc WHERE proname = 'fun_consultarperfil';
+	IF  found THEN
+		DROP FUNCTION fun_ConsultarPerfil(Id Int);
+	END IF;
+	
+		-- fun_ConsultarSolicitudesPendientes.sql
+	PERFORM proname  FROM pg_proc WHERE proname = 'fun_consultarsolicitudespendientes';
+	IF  found THEN
+		DROP FUNCTION fun_ConsultarSolicitudesPendientes(Id Int);
+	END IF;
+	
+		-- fun_ConsultarSolicitudHistorial.sql
+	PERFORM proname FROM pg_proc WHERE proname = 'fun_consultarsolicitudhistorial';
+	IF  found THEN
+		DROP FUNCTION fun_ConsultarSolicitudHistorial(Id Int);
+	END IF;
+	
+	
+		-- fun_NuevaSolicitud.sql
+	PERFORM proname  FROM pg_proc WHERE proname = 'fun_nuevasolicitud';
+	IF  found THEN
+		DROP FUNCTION fun_NuevaSolicitud(Id Int,Monto real, Edad int, TarjetaDeCredito varchar(10),PlazoDeInteres real);
+	END IF;
+	
+
+END;
+$BODY$
+	LANGUAGE 'plpgsql' VOLATILE SECURITY DEFINER;
+
+
+	
+
+SELECT fun_InstalarFunciones();
+DROP FUNCTION fun_InstalarFunciones();
+
+
+
+CREATE FUNCTION fun_AceptarSolicitud()
+RETURNS boolean AS $$
+DECLARE
+fun_IdSolicitud int;
+fun_Edad int;
+fun_TarjetaDeCredito VARCHAR(10);
+var_PocesoPendiente  VARCHAR(10);
+var_PocesoAceptada  VARCHAR(10);
+var_PocesoRechazada  VARCHAR(10);
+var_SiTieneTarjeta VARCHAR(10);
+var_NoTieneTarjeta  VARCHAR(10);
+BEGIN
+var_PocesoPendiente := 'PENDIENTE';
+var_PocesoAceptada  :='ACEPTADA';
+var_PocesoRechazada := 'RECHAZADA';
+var_SiTieneTarjeta :='SI TIENE';
+var_NoTieneTarjeta := 'NO TIENE';
+
+       select IdSolicitud INTO fun_IdSolicitud from Solicitud where ProcesoDeAutorizacion = var_PocesoPendiente;
+       if fun_IdSolicitud is null
+		then
+			RETURN false;
+		else
+			select IdSolicitud,edad,TarjetaDeCredito INTO fun_IdSolicitud,fun_Edad,fun_TarjetaDeCredito  from Solicitud  WHERE ProcesoDeAutorizacion = var_PocesoPendiente order by fec_creacion asc limit 1;
+			if fun_Edad >= 20 and fun_TarjetaDeCredito = var_SiTieneTarjeta
+				then
+					update Solicitud set ProcesoDeAutorizacion = var_PocesoAceptada,  fec_Aceptacion = timenow()  where IdSolicitud = fun_IdSolicitud;
+					RETURN true;
+				else
+				        update Solicitud set ProcesoDeAutorizacion = var_PocesoRechazada,  fec_Aceptacion = timenow() where IdSolicitud = fun_IdSolicitud;
+					RETURN true;
+					END IF;
+			RETURN true;
+			END IF;
+END;
+$$ LANGUAGE plpgsql
+SECURITY DEFINER;
+
+
 CREATE FUNCTION fun_ConsultarGrabarUsuario(usuario TEXT)
 RETURNS int AS $$
 DECLARE
@@ -19,7 +155,77 @@ END;
 $$ LANGUAGE plpgsql
 SECURITY DEFINER;
 
-CREATE FUNCTION fun_NuevaSolicitud(Id Int,Monto real, Edad int, TarjetaDeCredito boolean,PlazoDeInteres real, ProcesoDeAutorizacion boolean  )
+CREATE FUNCTION fun_ConsultarPerfil(Id Int)
+ RETURNS TABLE (
+ val_Nombre varchar(20),
+ val_Monto real,
+ val_Edad int,
+ val_TarjetaDeCredito varchar(10),
+ val_PlazoDeInteres real,
+ val_ProcesoDeAutorizacion varchar(10)
+) 
+AS $$
+DECLARE 
+var_PocesoPendiente  VARCHAR(10);
+
+BEGIN
+var_PocesoPendiente := 'PENDIENTE';
+
+RETURN QUERY 
+select Usuario.Nombre, Solicitud.Monto,Solicitud.Edad,Solicitud.TarjetaDeCredito,Solicitud.PlazoDeInteres,Solicitud.ProcesoDeAutorizacion 
+from  Solicitud 
+ inner join  Usuario  on Usuario.idusuario = Solicitud.idusuario where
+  Usuario.idusuario = '1' and Solicitud.ProcesoDeAutorizacion = var_PocesoPendiente  order by Solicitud.fec_creacion desc limit 1;
+     
+END;
+$$ LANGUAGE plpgsql
+SECURITY DEFINER;
+
+CREATE FUNCTION fun_ConsultarSolicitudesPendientes(Id Int)
+ RETURNS TABLE (
+ val_Monto real,
+ val_Edad int,
+ val_TarjetaDeCredito varchar(10),
+ val_PlazoDeInteres real,
+ val_ProcesoDeAutorizacion varchar(10)
+) 
+AS $$
+DECLARE 
+var_PocesoPendiente  VARCHAR(10);
+
+BEGIN
+var_PocesoPendiente := 'PENDIENTE';
+
+RETURN QUERY SELECT
+	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion = var_PocesoPendiente and IdUsuario = Id;       
+END;
+$$ LANGUAGE plpgsql
+SECURITY DEFINER;
+
+
+CREATE FUNCTION fun_ConsultarSolicitudHistorial(Id Int)
+ RETURNS TABLE (
+ val_Monto real,
+ val_Edad int,
+ val_TarjetaDeCredito VARCHAR(10),
+ val_PlazoDeInteres real,
+ val_ProcesoDeAutorizacion VARCHAR(10)
+) 
+AS $$
+DECLARE 
+var_PocesoPendiente  VARCHAR(10);
+
+BEGIN
+var_PocesoPendiente := 'PENDIENTE';
+
+RETURN QUERY SELECT
+	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion != var_PocesoPendiente and IdUsuario = Id;       
+END;
+$$ LANGUAGE plpgsql
+SECURITY DEFINER;
+
+
+CREATE FUNCTION fun_NuevaSolicitud(Id Int,Monto real, Edad int, TarjetaDeCredito varchar(10),PlazoDeInteres real  )
 RETURNS boolean AS $$
 DECLARE
 
@@ -28,7 +234,6 @@ fun_Monto  ALIAS FOR $2;
 fun_Edad  ALIAS FOR $3;
 fun_TarjetaDeCredito ALIAS FOR $4;
 fun_PlazoDeInteres ALIAS FOR $5;
-fun_ProcesoDeAutorizacion ALIAS FOR $6;
 
 
 BEGIN
@@ -38,55 +243,10 @@ BEGIN
 		then
 			RETURN false;
 		else
-		  INSERT INTO Solicitud(IdUsuario,Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion)
-		  VALUES(fun_Id,fun_Monto,fun_Edad,fun_TarjetaDeCredito,fun_PlazoDeInteres,fun_ProcesoDeAutorizacion);
+		  INSERT INTO Solicitud(IdUsuario,Monto,Edad,TarjetaDeCredito,PlazoDeInteres)
+		  VALUES(fun_Id,fun_Monto,fun_Edad,fun_TarjetaDeCredito,fun_PlazoDeInteres);
 		  RETURN true;
 		  END IF;
-END;
-$$ LANGUAGE plpgsql
-SECURITY DEFINER;
-
-CREATE FUNCTION fun_AceptarSolicitud()
-RETURNS boolean AS $$
-DECLARE
-fun_IdSolicitud int;
-fun_Edad int;
-fun_TarjetaDeCredito boolean;
-
-BEGIN
-
-       select IdSolicitud INTO fun_IdSolicitud from Solicitud where ProcesoDeAutorizacion IS NULL;
-       if fun_IdSolicitud is null
-		then
-			RETURN false;
-		else
-			select IdSolicitud,edad,TarjetaDeCredito INTO fun_IdSolicitud,fun_Edad,fun_TarjetaDeCredito  from Solicitud  WHERE ProcesoDeAutorizacion IS NULL order by fec_Aceptacion limit 1;
-			if fun_Edad >= 20 and fun_TarjetaDeCredito is TRUE
-				then
-					update Solicitud set ProcesoDeAutorizacion = TRUE ,  fec_Aceptacion = timenow()  where IdSolicitud = fun_IdSolicitud;
-					RETURN true;
-				else
-				        update Solicitud set ProcesoDeAutorizacion = FALSE ,  fec_Aceptacion = timenow() where IdSolicitud = fun_IdSolicitud;
-					RETURN true;
-					END IF;
-			RETURN true;
-			END IF;
-END;
-$$ LANGUAGE plpgsql
-SECURITY DEFINER;
-
-CREATE FUNCTION fun_ConsultarSolicitudHistorial(Id Int)
-RETURNS table AS $$
-DECLARE
-fun_Id ALIAS FOR $1;
-
-BEGIN
-	select * from  Solicitud where ProcesoDeAutorizacion is not NULL and IdUsuario = fun_Id;       
-	if fun_IdSolicitud is null
-       then
-			RETURN false;
-        else
-      
 END;
 $$ LANGUAGE plpgsql
 SECURITY DEFINER;
