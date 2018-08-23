@@ -7,7 +7,6 @@ label, input[type="submit"] {
   display: inline-block;
 }
 
-
 #Orders h1 {
    color:red;
 }
@@ -22,4 +21,12 @@ background:lightgrey;
 #table_solicitudes {
 background:lightgrey;
 
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
 }
