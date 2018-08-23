@@ -2,13 +2,13 @@
 
         <div  class="col-sm-10">
           <div id="monto">
-            <label for="name">Monto:</label>
-            <input type="number" min="0.00" max="10000.00" step="0.01"
-                    ng-model="monto" ng-required="true"  class="form-control">      
+            <label >Monto:</label>
+            <input  ng-change="calcularInteres()" type="number" min="0.00" max="10000.00" step="0.01"
+                    ng-model="monto" ng-required="true" value="0.00" class="form-control">      
         </div>
         
       <div id="edad">
-            <label for="name">Edad:</label>
+            <label>Edad:</label>
             <input input type="number" name="age" value=""
                    ng-model="edad" ng-required="true"  class="form-control">
           </div>
@@ -20,16 +20,19 @@
         </div>
                   
 
-       <div id="plazo">
-            <label for="name">Plazo:</label>
+       <div>
+            <label   for="name">Plazo:</label>
             
-            <select  ng-model="plazo" id="plazos">
-                         <option value='3' ng-selected="true">3 pagos: 5% de interes</option>
+            <select ng-model="plazo" ng-change="calcularInteres()" ng-required="true"  >
+                         <option value='3'  >3 pagos: 5% de interes</option>
                          <option  value="6" >6 pagos: 7% de interes</option>
                          <option  value="9" >9 pagos: 12% de interes</option>
             </select>
 
            </div> 
+           <div >
+              <label >TOTAL A PAGAR: {{total}}</label>
+              <div>
            <div>
             <button  type="submit" id="submit" name="submit" 
                     class="btn btn-primary pull-left" 

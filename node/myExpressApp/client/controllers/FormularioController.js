@@ -3,7 +3,14 @@ FormularioSession.controller("FormularioSessionController", ['$scope','Formulari
 
         $scope.FormularioSessionAppService = []
      
-
+        $scope.calcularInteres =   function()
+        {
+        var monto = $scope.monto;
+var plazo = $scope.plazo;
+ var interes = plazo / 100;
+var total = monto * (1 + interes * 1);
+$scope.total = total;
+        }
                 function GetURLParameter(sParam)
         {
             var sPageURL = window.location.hash.substring(1); 
