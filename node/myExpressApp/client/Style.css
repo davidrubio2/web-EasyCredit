@@ -7,9 +7,6 @@ label, input[type="submit"] {
   display: inline-block;
 }
 
-div {
-  margin: 10px;
-}
 
 #Orders h1 {
    color:red;
