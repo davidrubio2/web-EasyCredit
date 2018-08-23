@@ -38,7 +38,7 @@ FormularioSession.controller("FormularioSessionController", ['$scope', 'Formular
                         "Monto": $scope.monto,
                         "Edad": $scope.edad,
                         "TarjetaDeCredito": tieneTarjeta,
-                        "PlazoDeInteres": $scope.plazo + "%",
+                        "PlazoDeInteres": $scope.plazo,
                 }
 
                 FormularioSessionService.PostNuevaSolicitud(data).then(function (response) {
