@@ -1,4 +1,4 @@
-CREATE FUNCTION fun_NuevaSolicitud(Id Int,Monto real, Edad int, TarjetaDeCredito boolean,PlazoDeInteres real  )
+CREATE FUNCTION fun_NuevaSolicitud(Id Int,Monto real, Edad int, TarjetaDeCredito varchar(10),PlazoDeInteres real  )
 RETURNS boolean AS $$
 DECLARE
 
