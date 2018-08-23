@@ -8,7 +8,7 @@
 
             <div class="col-sm-10">
                 <label for="name">Username:</label>
-                <input type="text" name="Username" maxlength="30" ng-pattern="first_name" ng-model="firstname" ng-required="true" class="form-control">
+                <input type="text" name="Username" maxlength="30" ng-pattern="user_name" ng-model="username" ng-required="true" class="form-control">
                 <span class="red-text" ng-if="inquiryForm.Username.$error.required && 
                           inquiryForm.Username.$dirty">Username es necesario</span>
                 <span class="red-text" ng-show="inquiryForm.Username.$error.pattern">
