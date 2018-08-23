@@ -11,7 +11,11 @@ angular.module('PanelSessionAppService', [])
                                 return $http.post(url, data)
 
                         },
+                        getPerfil: function (data) {
+                                var url = 'api/consultarPerfil'
+                                return $http.post(url, data)
 
+                        },
 
                 }
 

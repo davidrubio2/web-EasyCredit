@@ -30,6 +30,11 @@ PanelSession.controller("PanelSesssionController", ['$scope', 'PanelSessionServi
         $scope.SolicitudesPendientes = response.data.data;
     });
 
+    PanelSessionService.getPerfil(data).then(function (response) {
+        $scope.PanelSessionAppService.push(response.data)
+        $scope.Perfil = response.data.data;
+    });
+
     $scope.Ingresar = function () {
 
         location.href = "#/FormularioPage?Id=" + $scope.Id;
