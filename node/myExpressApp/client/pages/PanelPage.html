@@ -46,12 +46,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in HistorialSolicitudes">
+                <tr ng-class="{'red': item.val_procesodeautorizacion === 'RECHAZADA','green': item.val_procesodeautorizacion === 'ACEPTADA' }" ng-repeat="item in HistorialSolicitudes">
                     <td>{{ item.val_monto }}</td>
                     <td>{{ item.val_edad }}</td>
                     <td>{{ item.val_tarjetadecredito }}</td>
                     <td>{{ item.val_plazodeinteres }}</td>
-                    <td>{{ item.val_procesodeautorizacion }}</td>
+                    <td>{{  item.val_procesodeautorizacion }} </td>
                 </tr>
             </tbody>
         </table>
