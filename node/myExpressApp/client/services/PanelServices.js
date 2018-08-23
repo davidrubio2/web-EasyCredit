@@ -3,17 +3,17 @@ angular.module('PanelSessionAppService', [])
                 var handler = {
                         getHistorialSolicitudes: function (data) {
                                 var url = 'api/consultarSolicitudHistorial'
-                                return $http.post(url,data)
-                                
-                },
-                getSolicitudesPendientes: function (data) {
-                        var url = 'api/consultarSolicitudesPendientes'
-                        return $http.post(url,data)
-                        
-        },
+                                return $http.post(url, data)
+
+                        },
+                        getSolicitudesPendientes: function (data) {
+                                var url = 'api/consultarSolicitudesPendientes'
+                                return $http.post(url, data)
+
+                        },
 
 
-        }
+                }
 
-        return handler;
-}]);	
+                return handler;
+        }]);	

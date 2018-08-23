@@ -1,6 +1,6 @@
 'use strict';
 
-var EasyCredit = angular.module('EasyCredit', ['ngRoute', 'InicioSession','PanelSession','FormularioSession']);
+var EasyCredit = angular.module('EasyCredit', ['ngRoute', 'InicioSession', 'PanelSession', 'FormularioSession']);
 EasyCredit.config(['$routeProvider',
     function (
         $routeProvider
