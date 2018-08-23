@@ -42,6 +42,7 @@ FormularioSession.controller("FormularioSessionController", ['$scope','Formulari
                         $scope.FormularioSessionAppService.push(response.data)
                         $scope.NuevaSolicitud = response.data.data;
                 });
+                location.href = "#/PanelPage?Id=" + $scope.Id;
         }
 }]);
 
