@@ -1,15 +1,37 @@
+const initOptions = {
+  // global event notification;
+  error(error, e) {
+      if (e.cn) {
+          // A connection-related error;
+          //
+          // Connections are reported back with the password hashed,
+          // for safe errors logging, without exposing passwords.
+          console.log('CN:', e.cn);
+          console.log('EVENT:', error.message || error);
+      }
+  }
+};
 
-var pgp = require('pg-promise')({});
+var pgp = require('pg-promise')(initOptions);
+
 var cn = {
-  host: 'localhost', // server name or IP address;
+  user: 'xisgvbuqbefvqs',
+  password: '8ece9cc1f6a10692ffe6f69cd6d205c206f2f34a6b4635b5744417aa760c4c27',
+  database: 'd9kls1oslb8occ',
   port: 5432,
-  database: 'EasyCredit',
-  user: 'postgres',
-  password: '1'
+  host: 'ec2-23-21-121-220.compute-1.amazonaws.com' // server name or IP address;
+
 };
 
 var db = pgp(cn);
 
+db.connect()
+    .then(obj => {
+        obj.done(); // success, release the connection;
+    })
+    .catch(error => {
+        console.log('ERROR:', error.message || error);
+    });
 
 // add query functions
 
