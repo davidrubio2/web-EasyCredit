@@ -34,7 +34,8 @@ $scope.PanelSessionAppService = []
      });
 
      $scope.Ingresar = function () {
-                 location.href = "#/FormularioPage";
+
+        location.href = "#/FormularioPage?Id=" + $scope.Id;
 }
 
 
