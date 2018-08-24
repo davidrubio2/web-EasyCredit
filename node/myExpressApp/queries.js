@@ -22,7 +22,7 @@ var cn = {
   host: 'ec2-23-21-121-220.compute-1.amazonaws.com' // server name or IP address;
 
 };
-
+pgp.pg.defaults.ssl = true;
 var db = pgp(cn);
 
 db.connect()
