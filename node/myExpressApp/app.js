@@ -14,7 +14,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.get('/' , function(req,res) {
-  res.sendfile('views/index.html');
+  res.sendfile('./views/Index.html');
 } );
 
 app.use(logger('dev'));
