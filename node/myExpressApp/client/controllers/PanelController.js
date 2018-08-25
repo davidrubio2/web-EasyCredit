@@ -40,5 +40,8 @@ PanelSession.controller("PanelSesssionController", ['$scope', 'PanelSessionServi
         location.href = "#/FormularioPage?Id=" + $scope.Id;
     }
 
+    setTimeout(function(){
+        window.location.reload(1);
+     }, 60000);
 
 }]);
