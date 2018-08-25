@@ -1,95 +1,95 @@
 <title>EasyCredit</title>
 
 <body>
-        <form class="contact-form" ng-submit="Ingresar()" name="inquiryForm" novalidate>
+    <form class="contact-form" ng-submit="Ingresar()" name="inquiryForm" novalidate>
 
-    <div class="container-fluid">
-      <div class="row">
-    <div class="table-responsive col-4"> 
-      <h2>Informacion del Usuario</h2>
-    
-        <table id= "table_perfil"  class="table table-bordered "  >
-            <thead>
-    
-                <tr>
-                    <td>Nombre</td>
-                </tr
-              </thead>
-              <tbody>
-                <tr ng-repeat="item in Perfil">           
-                        <td>{{ item.val_nombre }}</td>
-                </tr>
-            </tbody>
-              <thead>
-                <tr>
-                <td>Monto</td>
-                <td>Edad</td>
-                <td>Tarjeta</td>
-                <td>Plazo</td>
-                <td>Proceso</td>
-            </tr>
-        </thead>
-            <tbody>
-                <tr ng-repeat="item in Perfil">           
-                        <td>{{ item.val_monto }}</td>
-                        <td>{{ item.val_edad }}</td>
-                        <td>{{ item.val_tarjetadecredito }}</td>
-                        <td>{{ item.val_plazodeinteres }}%</td>
-                        <td>{{ item.val_procesodeautorizacion }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-      <div class="table-responsive col-4">
-         <h2>Historial Crediticio</h2>
-        <table id= "table_historial" class="table table-bordered"  >
-            <thead>
-                <tr>
-                    <td>Monto</td>
-                    <td>Edad</td>
-                    <td>Tarjeta</td>
-                    <td>Plazo</td>
-                    <td id="historial">Proceso</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-class="{'red': item.val_procesodeautorizacion === 'RECHAZADA','green': item.val_procesodeautorizacion === 'ACEPTADA' }" ng-repeat="item in HistorialSolicitudes">
-                    <td>{{ item.val_monto }}</td>
-                    <td>{{ item.val_edad }}</td>
-                    <td>{{ item.val_tarjetadecredito }}</td>
-                    <td>{{ item.val_plazodeinteres }}%</td>
-                    <td>{{  item.val_procesodeautorizacion }} </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-      
-      <div class="table-responsive col-4">
-          <h2>Solicitudes actuales</h2>
-    
-        <table id= "table_solicitudes" class="table table-bordered"  >
-            <thead>
-                <tr>
-                   <td>Monto</td>
-                    <td>Edad</td>
-                    <td>Tarjeta</td>
-                    <td>Plazo</td>
-                    <td>Proceso</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in SolicitudesPendientes">
-                     <td>{{ item.val_monto }}</td>
-                     <td>{{ item.val_edad }}</td>
-                    <td>{{ item.val_tarjetadecredito }}</td>
-                     <td>{{ item.val_plazodeinteres }}%</td>
-                    <td>{{ item.val_procesodeautorizacion }}</td>
-                </tr>
-            </tbody>
-        </table>
-            <button type="submit" class="btn btn-success">Nueva Solicitud</button> 
-      </div> 
-      </div> 
+        <div class="container-fluid">
+            <div class="row">
+                <div class="table-responsive col-4">
+                    <h2>Informacion del Usuario</h2>
+
+                    <table id="table_perfil" class="table table-bordered ">
+                        <thead>
+
+                            <tr>
+                                <td>Nombre</td>
+                            </tr </thead>
+                            <tbody>
+                                <tr ng-repeat="item in Perfil">
+                                    <td>{{ item.val_nombre }}</td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <td>Monto</td>
+                                    <td>Edad</td>
+                                    <td>Tarjeta</td>
+                                    <td>Plazo</td>
+                                    <td>Proceso</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in Perfil">
+                                    <td>{{ item.val_monto }}</td>
+                                    <td>{{ item.val_edad }}</td>
+                                    <td>{{ item.val_tarjetadecredito }}</td>
+                                    <td>{{ item.val_plazodeinteres }}%</td>
+                                    <td>{{ item.val_procesodeautorizacion }}</td>
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="table-responsive col-4">
+                    <h2>Historial Crediticio</h2>
+                    <table id="table_historial" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>Monto</td>
+                                <td>Edad</td>
+                                <td>Tarjeta</td>
+                                <td>Plazo</td>
+                                <td id="historial">Proceso</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-class="{'red': item.val_procesodeautorizacion === 'RECHAZADA','green': item.val_procesodeautorizacion === 'ACEPTADA' }"
+                                ng-repeat="item in HistorialSolicitudes">
+                                <td>{{ item.val_monto }}</td>
+                                <td>{{ item.val_edad }}</td>
+                                <td>{{ item.val_tarjetadecredito }}</td>
+                                <td>{{ item.val_plazodeinteres }}%</td>
+                                <td>{{ item.val_procesodeautorizacion }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-responsive col-4">
+                    <h2>Solicitudes actuales</h2>
+
+                    <table id="table_solicitudes" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>Monto</td>
+                                <td>Edad</td>
+                                <td>Tarjeta</td>
+                                <td>Plazo</td>
+                                <td>Proceso</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in SolicitudesPendientes">
+                                <td>{{ item.val_monto }}</td>
+                                <td>{{ item.val_edad }}</td>
+                                <td>{{ item.val_tarjetadecredito }}</td>
+                                <td>{{ item.val_plazodeinteres }}%</td>
+                                <td>{{ item.val_procesodeautorizacion }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-success">Nueva Solicitud</button>
+                </div>
+            </div>
     </form>
-    </body>
+</body>
