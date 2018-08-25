@@ -181,31 +181,44 @@ CREATE FUNCTION fun_ConsultarPerfil(Id Int)
 AS $$
 DECLARE 
 var_PocesoPendiente  VARCHAR(10);
+fun_IdSolicitud int;
 
 BEGIN
 var_PocesoPendiente := 'PENDIENTE';
 
-RETURN QUERY 
-select Usuario.Nombre, Solicitud.Monto,Solicitud.Edad,Solicitud.TarjetaDeCredito,Solicitud.PlazoDeInteres,Solicitud.ProcesoDeAutorizacion 
-from  Solicitud 
- inner join  Usuario  on Usuario.idusuario = Solicitud.idusuario where
-  Usuario.idusuario = '1' and Solicitud.ProcesoDeAutorizacion = var_PocesoPendiente  order by Solicitud.fec_creacion desc limit 1;
-     
+  select IdSolicitud INTO fun_IdSolicitud from Solicitud where ProcesoDeAutorizacion = var_PocesoPendiente;
+       if fun_IdSolicitud is null
+		then
+
+		RETURN QUERY 
+			select Nombre, null::real  as  fake, null::int as fake, null::varchar as fake, null::real as fake, null::varchar as fake
+			from  Usuario where
+			  idusuario = Id;
+			
+		else
+		RETURN QUERY 
+			select Usuario.Nombre, Solicitud.Monto,Solicitud.Edad,Solicitud.TarjetaDeCredito,Solicitud.PlazoDeInteres,Solicitud.ProcesoDeAutorizacion 
+			from  Solicitud 
+			 inner join  Usuario  on Usuario.idusuario = Solicitud.idusuario where
+			  Usuario.idusuario = Id and Solicitud.ProcesoDeAutorizacion = var_PocesoPendiente  order by Solicitud.fec_creacion desc limit 1;
+		
+END IF;
 END;
 $$ LANGUAGE plpgsql
 SECURITY DEFINER
 
 drop function fun_ConsultarPerfil;
-select fun_ConsultarPerfil('1');
+select fun_ConsultarPerfil('4');
 
 select Usuario.Nombre, Solicitud.Monto,Solicitud.Edad,Solicitud.TarjetaDeCredito,Solicitud.PlazoDeInteres,Solicitud.ProcesoDeAutorizacion 
 from  Solicitud 
- inner join  Usuario  on Usuario.idusuario = Solicitud.idusuario where Usuario.idusuario = '2' order by Solicitud.fec_creacion desc limit 1
+ inner join  Usuario  on Usuario.idusuario = Solicitud.idusuario where Usuario.idusuario = '1' order by Solicitud.fec_creacion desc limit 1
 
 select *
  from Solicitud  WHERE ProcesoDeAutorizacion IS NULL order by fec_creacion desc limit 1
 
-select Usuario.Nombre, Solicitud.Monto,Solicitud.Edad,Solicitud.TarjetaDeCredito,Solicitud.PlazoDeInteres,Solicitud.ProcesoDeAutorizacion 
-from  Solicitud 
- inner join  Usuario  on Usuario.idusuario = Solicitud.idusuario where
-  Usuario.idusuario = '1' and Solicitud.ProcesoDeAutorizacion = 'PENDIENTE'  order by Solicitud.fec_creacion desc limit 1;
+select Nombre, null::real  as  fake, null::int as fake, null::varchar as fake, null::real as fake, null::varchar as fake
+			from  Usuario where
+			  idusuario = '4'
+
+SELECT '' AS column1, '' AS column2;
