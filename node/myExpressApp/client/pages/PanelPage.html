@@ -13,16 +13,24 @@
     
                 <tr>
                     <td>Nombre</td>
-                    <td>Monto</td>
-                    <td>Edad</td>
-                    <td>Tarjeta</td>
-                    <td>Plazo</td>
-                    <td>Proceso</td>
-                </tr>
-            </thead>
-            <tbody>
+                </tr
+              </thead>
+              <tbody>
                 <tr ng-repeat="item in Perfil">           
                         <td>{{ item.val_nombre }}</td>
+                </tr>
+            </tbody>
+              <thead>
+                <tr>
+                <td>Monto</td>
+                <td>Edad</td>
+                <td>Tarjeta</td>
+                <td>Plazo</td>
+                <td>Proceso</td>
+            </tr>
+        </thead>
+            <tbody>
+                <tr ng-repeat="item in Perfil">           
                         <td>{{ item.val_monto }}</td>
                         <td>{{ item.val_edad }}</td>
                         <td>{{ item.val_tarjetadecredito }}</td>
