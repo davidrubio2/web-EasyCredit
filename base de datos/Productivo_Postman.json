@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "2ce4c8f2-926e-48ab-aa4b-cc192d0d6832",
-		"name": "concredito",
+		"_postman_id": "26f1392c-8077-4fe0-9506-6a4e0c6135be",
+		"name": "concreditoProductivo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "localhost/consultarGrabarUsuario",
+			"name": "herokuapp/consultarGrabarUsuario",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -17,16 +17,18 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Username\": \"david\"\n} "
+					"raw": "{\n\t\"Username\": \"david\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/consultarGrabarUsuario",
+					"raw": "http://young-earth-57270.herokuapp.com/api/consultarGrabarUsuario",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"young-earth-57270",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
+						"api",
 						"consultarGrabarUsuario"
 					]
 				}
@@ -34,7 +36,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost/consultarSolicitudHistorial",
+			"name": "herokuapp/consultarPerfil",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -48,12 +50,43 @@
 					"raw": "{\n\t\"Id\": \"1\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/consultarSolicitudHistorial",
+					"raw": "http://young-earth-57270.herokuapp.com/api/consultarPerfil",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"young-earth-57270",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
+					"path": [
+						"api",
+						"consultarPerfil"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "herokuapp/consultarSolicitudHistorial",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Id\": \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://young-earth-57270.herokuapp.com/api/consultarSolicitudHistorial",
+					"protocol": "http",
+					"host": [
+						"young-earth-57270",
+						"herokuapp",
+						"com"
+					],
 					"path": [
 						"api",
 						"consultarSolicitudHistorial"
@@ -63,7 +96,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost/nuevaSolicitud",
+			"name": "herokuapp/nuevaSolicitud",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -77,12 +110,13 @@
 					"raw": "{\n\t\"Id\": \"1\",\n\t\"Monto\": \"100\",\n\t\"Edad\": \"20\",\n\t\"TarjetaDeCredito\": \"SI TIENE\",\n\t\"PlazoDeInteres\": \"7\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/nuevaSolicitud",
+					"raw": "http://young-earth-57270.herokuapp.com/api/nuevaSolicitud",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"young-earth-57270",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"nuevaSolicitud"
@@ -92,7 +126,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost/aceptarSolicitud",
+			"name": "herokuapp/aceptarSolicitud",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -121,7 +155,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost/consultarSolicitudesPendientes",
+			"name": "herokuapp/consultarSolicitudesPendientes",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -144,35 +178,6 @@
 					"path": [
 						"api",
 						"consultarSolicitudesPendientes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost/consultarPerfil",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"Id\": \"1\"\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/consultarPerfil",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"consultarPerfil"
 					]
 				}
 			},
