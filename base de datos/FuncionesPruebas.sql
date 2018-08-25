@@ -129,7 +129,7 @@ BEGIN
 var_PocesoPendiente := 'PENDIENTE';
 
 RETURN QUERY SELECT
-	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion != var_PocesoPendiente and IdUsuario = Id;       
+	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion != var_PocesoPendiente and IdUsuario = Id order by fec_creacion desc;       
 END;
 $$ LANGUAGE plpgsql
 SECURITY DEFINER
@@ -137,6 +137,8 @@ SECURITY DEFINER
 drop function fun_ConsultarSolicitudHistorial;
 select fun_ConsultarSolicitudHistorial('1');
 
+SELECT Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion != 'PENDIENTE' and IdUsuario = '1' order by fec_creacion desc; 
+	 
 select * from  Solicitud where ProcesoDeAutorizacion is not NULL and IdUsuario = '2'
 
 ---------------------------------------------------------------------------------------------------------------------------

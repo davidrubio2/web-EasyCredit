@@ -219,7 +219,7 @@ BEGIN
 var_PocesoPendiente := 'PENDIENTE';
 
 RETURN QUERY SELECT
-	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion != var_PocesoPendiente and IdUsuario = Id;       
+	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion != var_PocesoPendiente and IdUsuario = Id order by fec_creacion desc;       
 END;
 $$ LANGUAGE plpgsql
 SECURITY DEFINER;
