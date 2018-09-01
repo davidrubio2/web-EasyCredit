@@ -1,12 +1,11 @@
 <title>EasyCredit</title>
 
-<body>
     <h1 align="center">Easy Credit</h1>
 
     <section class="contact-wrap">
-        <form class="contact-form" ng-submit="Ingresar()" name="inquiryForm" novalidate>
+        <form class="container" class="contact-form" ng-submit="Ingresar()" name="inquiryForm" novalidate>
 
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <label>Username:</label>
                 <input type="text" name="Username" maxlength="30" ng-pattern="user_name" ng-model="username" ng-required="true" class="form-control">
                 <span class="red-text" ng-if="inquiryForm.Username.$error.required && 
@@ -22,4 +21,3 @@
             </div>
         </form>
     </section>
-</body>
