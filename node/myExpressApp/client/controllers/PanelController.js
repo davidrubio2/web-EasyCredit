@@ -20,28 +20,37 @@ PanelSession.controller("PanelSesssionController", ['$scope', 'PanelSessionServi
     var data = {
         "Id": $scope.Id,
     }
-    PanelSessionService.getHistorialSolicitudes(data).then(function (response) {
-        $scope.PanelSessionAppService.push(response.data)
-        $scope.HistorialSolicitudes = response.data.data;
-    });
+    
+    var fetchHistorial = function() {
+        PanelSessionService.getHistorialSolicitudes(data).then(function (response) {
+            $scope.PanelSessionAppService.push(response.data)
+            $scope.HistorialSolicitudes = response.data.data;
+        })
+    }
 
-    PanelSessionService.getSolicitudesPendientes(data).then(function (response) {
-        $scope.PanelSessionAppService.push(response.data)
-        $scope.SolicitudesPendientes = response.data.data;
-    });
+    var fetchSolicitudes = function() {
+        PanelSessionService.getSolicitudesPendientes(data).then(function (response) {
+            $scope.PanelSessionAppService.push(response.data)
+            $scope.SolicitudesPendientes = response.data.data;
+        })
+    }
 
-    PanelSessionService.getPerfil(data).then(function (response) {
-        $scope.PanelSessionAppService.push(response.data)
-        $scope.Perfil = response.data.data;
-    });
+    var fetchPerfil = function() {
+        PanelSessionService.getPerfil(data).then(function (response) {
+            $scope.PanelSessionAppService.push(response.data)
+            $scope.Perfil = response.data.data;
+        })
+    }
 
     $scope.Ingresar = function () {
 
         location.href = "#/FormularioPage?Id=" + $scope.Id;
     }
 
-    setTimeout(function(){
-        window.location.reload(1);
-     }, 60000);
+    setInterval(function(){
+        fetchHistorial();
+        fetchPerfil();
+        fetchSolicitudes();
+     }, 1000);
 
 }]);
