@@ -35,3 +35,5 @@ drop table Solicitud;
 
 DELETE from Solicitud where id = '1'
 DELETE from Usuario where id = '1'
+
+select * from Usuario
