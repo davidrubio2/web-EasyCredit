@@ -12,9 +12,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+var options = { root: __dirname };
 app.get('/' , function(req,res) {
-  res.sendfile('./views/Index.html');
+  res.sendFile('./views/Index.html',options);
 } );
 
 app.use(logger('dev'));
