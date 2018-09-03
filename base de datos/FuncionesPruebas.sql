@@ -65,27 +65,27 @@ DECLARE
 fun_IdSolicitud int;
 fun_Edad int;
 fun_TarjetaDeCredito VARCHAR(10);
-var_PocesoPendiente  VARCHAR(10);
-var_PocesoAceptada  VARCHAR(10);
+var_ProcesoPendiente  VARCHAR(10);
+var_ProcesoAceptada  VARCHAR(10);
 var_PocesoRechazada  VARCHAR(10);
 var_SiTieneTarjeta VARCHAR(10);
 var_NoTieneTarjeta  VARCHAR(10);
 BEGIN
-var_PocesoPendiente := 'PENDIENTE';
-var_PocesoAceptada  :='ACEPTADA';
+var_ProcesoPendiente := 'PENDIENTE';
+var_ProcesoAceptada  :='ACEPTADA';
 var_PocesoRechazada := 'RECHAZADA';
 var_SiTieneTarjeta :='SI TIENE';
 var_NoTieneTarjeta := 'NO TIENE';
 
-       select IdSolicitud INTO fun_IdSolicitud from Solicitud where ProcesoDeAutorizacion = var_PocesoPendiente;
+       select IdSolicitud INTO fun_IdSolicitud from Solicitud where ProcesoDeAutorizacion = var_ProcesoPendiente;
        if fun_IdSolicitud is null
 		then
 			RETURN false;
 		else
-			select IdSolicitud,edad,TarjetaDeCredito INTO fun_IdSolicitud,fun_Edad,fun_TarjetaDeCredito  from Solicitud  WHERE ProcesoDeAutorizacion = var_PocesoPendiente order by fec_creacion asc limit 1;
+			select IdSolicitud,edad,TarjetaDeCredito INTO fun_IdSolicitud,fun_Edad,fun_TarjetaDeCredito  from Solicitud  WHERE ProcesoDeAutorizacion = var_ProcesoPendiente order by fec_creacion asc limit 1;
 			if fun_Edad >= 20 and fun_TarjetaDeCredito = var_SiTieneTarjeta
 				then
-					update Solicitud set ProcesoDeAutorizacion = var_PocesoAceptada,  fec_Aceptacion = timenow()  where IdSolicitud = fun_IdSolicitud;
+					update Solicitud set ProcesoDeAutorizacion = var_ProcesoAceptada,  fec_Aceptacion = timenow()  where IdSolicitud = fun_IdSolicitud;
 					RETURN true;
 				else
 				        update Solicitud set ProcesoDeAutorizacion = var_PocesoRechazada,  fec_Aceptacion = timenow() where IdSolicitud = fun_IdSolicitud;
@@ -123,13 +123,13 @@ CREATE FUNCTION fun_ConsultarSolicitudHistorial(Id Int)
 ) 
 AS $$
 DECLARE 
-var_PocesoPendiente  VARCHAR(10);
+var_ProcesoPendiente  VARCHAR(10);
 
 BEGIN
-var_PocesoPendiente := 'PENDIENTE';
+var_ProcesoPendiente := 'PENDIENTE';
 
 RETURN QUERY SELECT
-	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion != var_PocesoPendiente and IdUsuario = Id order by fec_creacion desc;       
+	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion != var_ProcesoPendiente and IdUsuario = Id order by fec_creacion desc;       
 END;
 $$ LANGUAGE plpgsql
 SECURITY DEFINER
@@ -152,13 +152,13 @@ CREATE FUNCTION fun_ConsultarSolicitudesPendientes(Id Int)
 ) 
 AS $$
 DECLARE 
-var_PocesoPendiente  VARCHAR(10);
+var_ProcesoPendiente  VARCHAR(10);
 
 BEGIN
-var_PocesoPendiente := 'PENDIENTE';
+var_ProcesoPendiente := 'PENDIENTE';
 
 RETURN QUERY SELECT
-	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion = var_PocesoPendiente and IdUsuario = Id;       
+	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion = var_ProcesoPendiente and IdUsuario = Id;       
 END;
 $$ LANGUAGE plpgsql
 SECURITY DEFINER
@@ -180,13 +180,13 @@ CREATE FUNCTION fun_ConsultarPerfil(Id Int)
 ) 
 AS $$
 DECLARE 
-var_PocesoPendiente  VARCHAR(10);
+var_ProcesoPendiente  VARCHAR(10);
 fun_IdSolicitud int;
 
 BEGIN
-var_PocesoPendiente := 'PENDIENTE';
+var_ProcesoPendiente := 'PENDIENTE';
 
-  select IdSolicitud INTO fun_IdSolicitud from Solicitud where ProcesoDeAutorizacion = var_PocesoPendiente;
+  select IdSolicitud INTO fun_IdSolicitud from Solicitud where ProcesoDeAutorizacion = var_ProcesoPendiente;
        if fun_IdSolicitud is null
 		then
 
@@ -200,7 +200,7 @@ var_PocesoPendiente := 'PENDIENTE';
 			select Usuario.Nombre, Solicitud.Monto,Solicitud.Edad,Solicitud.TarjetaDeCredito,Solicitud.PlazoDeInteres,Solicitud.ProcesoDeAutorizacion 
 			from  Solicitud 
 			 inner join  Usuario  on Usuario.idusuario = Solicitud.idusuario where
-			  Usuario.idusuario = Id and Solicitud.ProcesoDeAutorizacion = var_PocesoPendiente  order by Solicitud.fec_creacion desc limit 1;
+			  Usuario.idusuario = Id and Solicitud.ProcesoDeAutorizacion = var_ProcesoPendiente  order by Solicitud.fec_creacion desc limit 1;
 		
 END IF;
 END;

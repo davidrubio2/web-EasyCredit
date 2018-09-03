@@ -1,4 +1,4 @@
-CREATE FUNCTION fun_ConsultarPerfil(Id Int)
+﻿CREATE FUNCTION fun_ConsultarPerfil(Id Int)
  RETURNS TABLE (
  val_Nombre varchar(20),
  val_Monto real,
@@ -9,13 +9,13 @@ CREATE FUNCTION fun_ConsultarPerfil(Id Int)
 ) 
 AS $$
 DECLARE 
-var_PocesoPendiente  VARCHAR(10);
+var_ProcesoPendiente  VARCHAR(10);
 fun_IdSolicitud int;
 
 BEGIN
-var_PocesoPendiente := 'PENDIENTE';
+var_ProcesoPendiente := 'PENDIENTE';
 
-  select IdSolicitud INTO fun_IdSolicitud from Solicitud where ProcesoDeAutorizacion = var_PocesoPendiente;
+  select IdSolicitud INTO fun_IdSolicitud from Solicitud where ProcesoDeAutorizacion = var_ProcesoPendiente;
        if fun_IdSolicitud is null
 		then
 
@@ -29,7 +29,7 @@ var_PocesoPendiente := 'PENDIENTE';
 			select Usuario.Nombre, Solicitud.Monto,Solicitud.Edad,Solicitud.TarjetaDeCredito,Solicitud.PlazoDeInteres,Solicitud.ProcesoDeAutorizacion 
 			from  Solicitud 
 			 inner join  Usuario  on Usuario.idusuario = Solicitud.idusuario where
-			  Usuario.idusuario = Id and Solicitud.ProcesoDeAutorizacion = var_PocesoPendiente  order by Solicitud.fec_creacion desc limit 1;
+			  Usuario.idusuario = Id and Solicitud.ProcesoDeAutorizacion = var_ProcesoPendiente  order by Solicitud.fec_creacion desc limit 1;
 		
 END IF;
 END;

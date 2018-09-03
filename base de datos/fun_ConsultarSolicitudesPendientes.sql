@@ -1,4 +1,4 @@
-CREATE FUNCTION fun_ConsultarSolicitudesPendientes(Id Int)
+﻿CREATE FUNCTION fun_ConsultarSolicitudesPendientes(Id Int)
  RETURNS TABLE (
  val_Monto real,
  val_Edad int,
@@ -8,13 +8,13 @@ CREATE FUNCTION fun_ConsultarSolicitudesPendientes(Id Int)
 ) 
 AS $$
 DECLARE 
-var_PocesoPendiente  VARCHAR(10);
+var_ProcesoPendiente  VARCHAR(10);
 
 BEGIN
-var_PocesoPendiente := 'PENDIENTE';
+var_ProcesoPendiente := 'PENDIENTE';
 
 RETURN QUERY SELECT
-	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion = var_PocesoPendiente and IdUsuario = Id;       
+	 Monto,Edad,TarjetaDeCredito,PlazoDeInteres,ProcesoDeAutorizacion from  Solicitud where ProcesoDeAutorizacion = var_ProcesoPendiente and IdUsuario = Id;       
 END;
 $$ LANGUAGE plpgsql
 SECURITY DEFINER
