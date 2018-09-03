@@ -105,13 +105,11 @@ var_ProcesoPendiente  VARCHAR(10);
 var_ProcesoAceptada  VARCHAR(10);
 var_ProcesoRechazada  VARCHAR(10);
 var_SiTieneTarjeta VARCHAR(10);
-var_NoTieneTarjeta  VARCHAR(10);
 BEGIN
 var_ProcesoPendiente := 'PENDIENTE';
 var_ProcesoAceptada  :='ACEPTADA';
 var_ProcesoRechazada := 'RECHAZADA';
 var_SiTieneTarjeta :='SI TIENE';
-var_NoTieneTarjeta := 'NO TIENE';
 
        select IdSolicitud INTO fun_IdSolicitud from Solicitud where ProcesoDeAutorizacion = var_ProcesoPendiente;
        if fun_IdSolicitud is null
