@@ -6,13 +6,13 @@ fun_Edad int;
 fun_TarjetaDeCredito VARCHAR(10);
 var_ProcesoPendiente  VARCHAR(10);
 var_ProcesoAceptada  VARCHAR(10);
-var_PocesoRechazada  VARCHAR(10);
+var_ProcesoRechazada  VARCHAR(10);
 var_SiTieneTarjeta VARCHAR(10);
 var_NoTieneTarjeta  VARCHAR(10);
 BEGIN
 var_ProcesoPendiente := 'PENDIENTE';
 var_ProcesoAceptada  :='ACEPTADA';
-var_PocesoRechazada := 'RECHAZADA';
+var_ProcesoRechazada := 'RECHAZADA';
 var_SiTieneTarjeta :='SI TIENE';
 var_NoTieneTarjeta := 'NO TIENE';
 
@@ -27,7 +27,7 @@ var_NoTieneTarjeta := 'NO TIENE';
 					update Solicitud set ProcesoDeAutorizacion = var_ProcesoAceptada,  fec_Aceptacion = timenow()  where IdSolicitud = fun_IdSolicitud;
 					RETURN true;
 				else
-				        update Solicitud set ProcesoDeAutorizacion = var_PocesoRechazada,  fec_Aceptacion = timenow() where IdSolicitud = fun_IdSolicitud;
+				        update Solicitud set ProcesoDeAutorizacion = var_ProcesoRechazada,  fec_Aceptacion = timenow() where IdSolicitud = fun_IdSolicitud;
 					RETURN true;
 					END IF;
 			RETURN true;
